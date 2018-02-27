@@ -3,6 +3,8 @@ package stats;
 /*
 This class is home to the skill sheet of the playable character
 skill levels, as well as the exp requirements for advancing can be found here
+
+ToDo: Add level up exp requirement chart
 */
 
 public class player_stats

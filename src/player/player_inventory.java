@@ -19,12 +19,40 @@ public class player_inventory {
     {
         for(int i = 0; i < BAG_SIZE; i++)
         {
-            if(slots[i] == null)
+            int iNum = slots[i].getCurrentStack();
+            int xNum = x.getCurrentStack();
+            //if the item matches one in the inventory that has not reached max stack
+            if(slots[i] == x && iNum <= slots[i].getMaxStack() + xNum)
             {
-                slots[i] = x;
+                slots[i].setCurrentStack(iNum + xNum);
+            }
+            else if(slots[i] == null)
+            {
+                slots[i] = x; 
                 return true;
             }
         }
-        return false; //return true if there was an error
+        return false; //return false if there are no empty slots
     }
+    
+    public boolean removeItem(item x)
+    {
+        for(int i = 0; i < BAG_SIZE; i++)
+        {
+            int iNum = slots[i].getCurrentStack();
+            int xNum = x.getCurrentStack();
+            //if the item matches one in the inventory with a stack high enough to take out
+            if(slots[i] == x && iNum >= slots[i].getMaxStack() - xNum)
+            {
+                slots[i].setCurrentStack(iNum - xNum);
+            }
+            else if(slots[i] == null)
+            {
+                slots[i] = x; 
+                return true;
+            }
+        }
+        return false; //return false if there are no empty slots
+    }
+    
 }
